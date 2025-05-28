@@ -20,3 +20,42 @@ int ArraySum(int[] numbers) {
 }
 
 // Ex 3.3
+// Complexity is log(N), as we double the input size number of steps increased by 1
+int FindChessBoardSpace(int numberOfGrains)
+{
+	var chessBoardSpace = 1;
+	var placedGrains = 1;
+	var steps = 0;
+
+	while(placedGrains < numberOfGrains) {
+		placedGrains *= 2;
+		chessBoardSpace += 1;
+		steps++;
+	}
+
+	Console.WriteLine("# steps: {0}", steps);
+	return chessBoardSpace;
+}
+
+FindChessBoardSpace(100);
+FindChessBoardSpace(200);
+return;
+
+// Ex 3.4 Complexity id O(N), as we visit each word in collection and check it
+List<string> SelectAStrings(IEnumerable<string> words) {
+	var aWords = new List<string>();
+	var steps = 0;
+
+	foreach (var word in words) {
+		if (word.StartsWith("A")) {
+			aWords.Add(word);
+			steps++;
+		}
+	}
+	Console.WriteLine("# steps: {0}", steps);
+	return aWords;
+}
+
+// Ex 3.5
+
+
