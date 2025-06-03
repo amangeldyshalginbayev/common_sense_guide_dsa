@@ -39,7 +39,7 @@ int FindChessBoardSpace(int numberOfGrains)
 
 FindChessBoardSpace(100);
 FindChessBoardSpace(200);
-return;
+
 
 // Ex 3.4 Complexity id O(N), as we visit each word in collection and check it
 List<string> SelectAStrings(IEnumerable<string> words) {
@@ -56,6 +56,21 @@ List<string> SelectAStrings(IEnumerable<string> words) {
 	return aWords;
 }
 
-// Ex 3.5
+// Ex 3.5 Complexity O(1), number of steps does not depend on input size
+double FindMedian(IEnumerable<int> numbers)
+{
+	var numbersList = numbers.ToList();
+	var middle = numbersList.Count() / 2;
 
+	if (numbersList.Count() % 2 == 0) {
+		return (numbersList[middle - 1] + numbersList[middle]) / 2d;
+	}
+	else {
+		return numbersList[middle];
+	}
+}
+
+Console.WriteLine("FindMedian():");
+Console.WriteLine(FindMedian([1,3,3,6,7,8,9]));
+Console.WriteLine(FindMedian([1,2,3,4,5,6,8,9]));
 
