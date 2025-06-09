@@ -86,8 +86,30 @@ bool HasDuplicateValueLinearWithList(int[] numbers) {
 
 Console.WriteLine(HasDuplicateValueLinearWithList([1,2,3,4,5,6,7]));
 
-//Ex4.1
-1	
+//Ex4.3
+// Compexity is O(N^2) as its nested loop
+long FindGreatestProduct(int[] numbers) {
+	var steps = 0;
+	var greatestProduct = -1L;
+	if (numbers.Length > 1) {
+		greatestProduct = numbers[0] * numbers[1];
+		for (var i = 0; i < numbers.Length; i++) {
+			for (var j = 0; j < numbers.Length; j++) {
+				steps++;
+				var currentProduct = numbers[i] * numbers[j];
+				if (i != j && currentProduct > greatestProduct) {
+					greatestProduct = currentProduct;
+				}
+			}
+		}
+	}
+	
+	Console.WriteLine($"FindGreatestProduct() took #{steps} steps.");
+	return greatestProduct;
+}
+
+var greatestProduct = FindGreatestProduct([1,2,3,3,1,2,3,5]);
+Console.WriteLine(greatestProduct);
 
 
 
