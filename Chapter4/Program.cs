@@ -111,7 +111,22 @@ long FindGreatestProduct(int[] numbers) {
 var greatestProduct = FindGreatestProduct([1,2,3,3,1,2,3,5]);
 Console.WriteLine(greatestProduct);
 
+//Ex4.4
+// Complexity is O(N)
+int? FindGreatestNumber(int[] numbers) {
+	int? greatestNumber = null;
+	if (numbers != null && numbers.Any()) {
+		greatestNumber = numbers[0];
+		foreach (var n in numbers) {
+			if (n > greatestNumber) {
+				greatestNumber = n;
+			}
+		}
+	}
+	return greatestNumber;
+}
 
+Console.WriteLine($"Greatest number => {FindGreatestNumber([-100, -200, -300, 999, 1233, 123, 1, 12])}");
 
 
 
