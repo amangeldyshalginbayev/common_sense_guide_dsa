@@ -5,7 +5,7 @@ void SelectionSort(int[] numbers) {
 		for (var i = 0; i < numbers.Length - 1; i++) {
 			var lowestNumberIndex = i;
 			for (var j = i + 1; j < numbers.Length; j++) {
-				if (numbers[j] < numbers[i]) {
+				if (numbers[j] < numbers[lowestNumberIndex]) {
 					lowestNumberIndex = j;
 				}
 			}
@@ -17,13 +17,12 @@ void SelectionSort(int[] numbers) {
 	}
 }
 
-int[] numbers = [3, 7, -1, 0, -100, 33, 129, 6];
-SelectionSort(numbers);
-
 void PrintNumbers(int[] numbers) {
 	foreach (var n in numbers) {
 		Console.Write($"{n} ");
 	}
 }
 
+int[] numbers = [3, 7, -1, 0, -100, 33, 129, 6];
+SelectionSort(numbers);
 PrintNumbers(numbers);
