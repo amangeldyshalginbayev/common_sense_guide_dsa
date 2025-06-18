@@ -63,6 +63,7 @@ bool TwoSumLinear(int[] numbers) {
 Console.WriteLine($"TwoSumLinear([1,2,3,4,0]) => {TwoSumLinear([1,2,3,4,0])}");
 
 // Ex 6.4
+// Complexity is O(N), N number of characters
 bool containsX(string word) {
 	var foundX = false;
 	foreach (var c in word) {
@@ -73,7 +74,20 @@ bool containsX(string word) {
 	return foundX;
 }
 
+Console.WriteLine($"containsX('LaLaLa') => {containsX("LaLaLa")}");
+Console.WriteLine($"containsX('BravoBravoBravoBravoX') => {containsX("BravoBravoBravoBravoX")}");
 
+bool containsXOptimized(string word) {
+	var foundX = false;
+	foreach (var c in word) {
+		if (c == 'X') {
+			foundX = true;
+			break;
+		}
+	}
+	return foundX;
+}
 
-
+Console.WriteLine($"containsXOptimized('LaLaLa') => {containsXOptimized("LaLaLa")}");
+Console.WriteLine($"containsXOptimized('BravoBravoBravoBravoX') => {containsXOptimized("BravoBravoBravoBravoX")}");
 
