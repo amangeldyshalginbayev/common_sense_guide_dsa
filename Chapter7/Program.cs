@@ -43,3 +43,50 @@ List<string> WordBuilder3Character(string[] words) {
 	}
 	return collection;
 }
+
+bool IsPalindrome(string word) {
+	var leftIndex = 0;
+	var rightIndex = word.Length - 1;
+	var isPalindrome = true;
+
+	while (leftIndex < word.Length / 2) {
+		if (word[leftIndex] != word[rightIndex]) {
+			isPalindrome = false;
+			break;
+		}
+		rightIndex--;
+		leftIndex++;
+	}
+	
+	return isPalindrome;
+}
+
+Console.WriteLine(IsPalindrome("kayak"));
+Console.WriteLine(IsPalindrome("abc"));
+
+
+List<int> PairwiseProducts(int[] numbers) {
+	List<int> products = new();
+	
+	for (var i = 0; i < numbers.Length - 1; i++) {
+		for (var j = 0; j < numbers.Length; j++) {
+			products.Add(numbers[i] * numbers[j]);
+		}
+	}
+	return products;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
