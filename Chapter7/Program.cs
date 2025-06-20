@@ -77,10 +77,19 @@ List<int> PairwiseProducts(int[] numbers) {
 }
 
 
+List<int> PairwiseProductOfNumbers(int[] firstNumbers, int[] secondNumbers) {
+	List<int> products = new();
+	
+	if ((firstNumbers?.Any() ?? false) && (secondNumbers?.Any() ?? false)) {
+		for (var i = 0; i < firstNumbers.Length; i++) {
+			for (var j = 0; j < secondNumbers.Length; j++) {
+				products.Add(firstNumbers[i] * secondNumbers[j]);
+			}
+		}
+	}
 
-
-
-
+	return products;
+} 
 
 
 
