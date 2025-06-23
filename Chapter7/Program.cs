@@ -61,8 +61,8 @@ bool IsPalindrome(string word) {
 	return isPalindrome;
 }
 
-Console.WriteLine(IsPalindrome("kayak"));
-Console.WriteLine(IsPalindrome("abc"));
+//Console.WriteLine(IsPalindrome("kayak"));
+//Console.WriteLine(IsPalindrome("abc"));
 
 
 List<int> PairwiseProducts(int[] numbers) {
@@ -91,8 +91,39 @@ List<int> PairwiseProductOfNumbers(int[] firstNumbers, int[] secondNumbers) {
 	return products;
 } 
 
+//Ex7.1
+// Takes N/2 steps for size of N, O(N)
+bool OneHundredSum(int[] numbers) {
+	var leftIndex = 0;
+	var rightIndex = numbers.Length - 1;
+	
+	while (leftIndex < numbers.Length / 2) {
+		if (numbers[leftIndex] + numbers[rightIndex] != 100) {
+			return false;
+		}
+		
+		leftIndex++;
+		rightIndex--;
+	}
+	
+	return true;
+}
 
 
+Console.WriteLine(OneHundredSum([1,2,3,4]));
+Console.WriteLine(OneHundredSum([1,99,1,99]));
+
+//Ex7.2
+int[] MergeSortedNumbers(int[] firstNumbers, int[] secondNumbers) {
+	var mergedNumbers = new List<int>();
+	var firstPointer = 0;
+	var secondPointer = 0;
+
+	while (firstPointer < firstNumbers.Length || secondPointer < secondNumbers.Length) {
+		
+	}
+	
+}
 
 
 
