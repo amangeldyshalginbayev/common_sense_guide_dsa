@@ -1,4 +1,5 @@
-﻿
+﻿using  static Common.Helper;
+
 double FindAverageOfEvenNumbers(int[] numbers) {
 	double average = -1;
 
@@ -110,9 +111,10 @@ bool OneHundredSum(int[] numbers) {
 }
 
 
-Console.WriteLine(OneHundredSum([1,2,3,4]));
-Console.WriteLine(OneHundredSum([1,99,1,99]));
+//Console.WriteLine(OneHundredSum([1,2,3,4]));
+//Console.WriteLine(OneHundredSum([1,99,1,99]));
 
+// O(N+M) 
 //Ex7.2
 int[] MergeSortedNumbers(int[] firstNumbers, int[] secondNumbers) {
 	var mergedNumbers = new List<int>();
@@ -120,10 +122,62 @@ int[] MergeSortedNumbers(int[] firstNumbers, int[] secondNumbers) {
 	var secondPointer = 0;
 
 	while (firstPointer < firstNumbers.Length || secondPointer < secondNumbers.Length) {
-		
+		if (firstPointer > firstNumbers.Length - 1) {
+			mergedNumbers.Add(secondNumbers[secondPointer]);
+			secondPointer++;
+		}
+		else if (secondPointer > secondNumbers.Length - 1) {
+			mergedNumbers.Add(firstNumbers[firstPointer]);
+			firstPointer++;
+		}
+		else if (firstNumbers[firstPointer] < secondNumbers[secondPointer]) {
+			mergedNumbers.Add(firstNumbers[firstPointer]);
+			firstPointer++;
+		}
+		else {
+			mergedNumbers.Add(secondNumbers[secondPointer]);
+			secondPointer++;
+		}
 	}
 	
+	return mergedNumbers.ToArray();
 }
+
+//PrintElements(MergeSortedNumbers([1,2,3,19], [4,5,6,8,99]));
+
+
+//Ex7.3
+bool FindNeedle(string needle, string haystack) {
+	var needleIndex = 0;
+	var haystackIndex = 0;
+
+	while (haystackIndex < haystack.Length) {
+		if (needle[needleIndex] == haystack[haystackIndex]) {
+			var foundNeedle = true;
+
+			while (needleIndex < needle.Length) {
+				
+			}
+		
+
+		}
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
