@@ -147,30 +147,44 @@ int[] MergeSortedNumbers(int[] firstNumbers, int[] secondNumbers) {
 
 
 //Ex7.3
+// M - needle length, M - haystack length, O((M-N)*N)
 bool FindNeedle(string needle, string haystack) {
-	var needleIndex = 0;
-	var haystackIndex = 0;
+	if (string.IsNullOrEmpty(needle)) return true;
+	if (needle.Length > haystack.Length) return false;
 
-	while (haystackIndex < haystack.Length) {
-		if (needle[needleIndex] == haystack[haystackIndex]) {
-			var foundNeedle = true;
+	int haystackIndex = 0;
 
-			while (needleIndex < needle.Length) {
-				if (needle[needleIndex] != haystack[haystackIndex + needleIndex]) {
-					foundNeedle = false;
-					break;
-				}
-				needleIndex++;
+	while (haystackIndex <= haystack.Length - needle.Length) {
+		int needleIndex = 0;
+		bool found = true;
+
+		while (needleIndex < needle.Length) {
+			if (haystack[haystackIndex + needleIndex] != needle[needleIndex]) {
+				found = false;
+				break;
 			}
-		
-			if (foundNeedle) {
-				return true;
-			}
-			
-			needleIndex = 0;
+			needleIndex++;
 		}
+
+		if (found) {
+			return true;
+		}
+
 		haystackIndex++;
 	}
+
+	return false;
+}
+
+//Console.WriteLine(FindNeedle("bgb", "efhijwqopdkowefsabgbwedfwefw"));
+//Console.WriteLine(FindNeedle("linux", "windows"));
+
+//Ex7.4
+long FindLargestProduct(int[] numbers) {
+	if (numbers.?Length < 3 ?? false) {
+		return -1;
+	}
+	var largestProduct = 
 }
 
 
