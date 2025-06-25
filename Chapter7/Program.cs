@@ -156,11 +156,20 @@ bool FindNeedle(string needle, string haystack) {
 			var foundNeedle = true;
 
 			while (needleIndex < needle.Length) {
-				
+				if (needle[needleIndex] != haystack[haystackIndex + needleIndex]) {
+					foundNeedle = false;
+					break;
+				}
+				needleIndex++;
 			}
 		
-
+			if (foundNeedle) {
+				return true;
+			}
+			
+			needleIndex = 0;
 		}
+		haystackIndex++;
 	}
 }
 
