@@ -182,10 +182,10 @@ bool FindNeedle(string needle, string haystack) {
 //Ex7.4
 //O(N^3)
 long FindLargestProduct(int[] numbers) {
-	if (numbers.?Length < 3 ?? false) {
+	if (numbers == null || numbers.Length < 3) {
 		return -1;
 	}
-	i = 0;
+	var i = 0;
 	
 	var largestProduct = numbers[0] * numbers[1] * numbers[2];
 
@@ -208,9 +208,17 @@ long FindLargestProduct(int[] numbers) {
 	return largestProduct;
 }
 
+//Rewrite with for loop for readability
 
+
+
+//Console.WriteLine(FindLargestProduct([1,2,3,4,5,6,7,8,9,10]));
 //Ex7.5
+object[] PickResume(object[] resumes) {
 
+
+
+}
 
 
 
