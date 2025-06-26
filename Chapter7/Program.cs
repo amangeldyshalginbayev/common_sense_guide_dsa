@@ -180,14 +180,36 @@ bool FindNeedle(string needle, string haystack) {
 //Console.WriteLine(FindNeedle("linux", "windows"));
 
 //Ex7.4
+//O(N^3)
 long FindLargestProduct(int[] numbers) {
 	if (numbers.?Length < 3 ?? false) {
 		return -1;
 	}
-	var largestProduct = 
+	i = 0;
+	
+	var largestProduct = numbers[0] * numbers[1] * numbers[2];
+
+	while (i < numbers.Length) {
+		var j = i + 1;
+		while (j < numbers.Length) {
+			var k = j + 1;
+			while (k < numbers.Length) {
+				var product = numbers[i] * numbers[j] * numbers[k];
+				if (product > largestProduct) {
+					largestProduct = product;
+				}
+				k++;
+			}
+			j++;
+		}
+		i++;
+	}
+	
+	return largestProduct;
 }
 
 
+//Ex7.5
 
 
 
