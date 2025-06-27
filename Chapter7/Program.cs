@@ -214,25 +214,30 @@ long FindLargestProduct(int[] numbers) {
 
 //Console.WriteLine(FindLargestProduct([1,2,3,4,5,6,7,8,9,10]));
 //Ex7.5
-object[] PickResume(object[] resumes) {
-	var eliminate = "top";
+// O(logn) take half each time
+string PickResume(string[] resumes)
+{
+    string eliminate = "top";
 
-	while (resumes != null && resumes.Length > 1) {
-		if (eliminate == "top") {
-			resumes = resumes[0..resumes.Length/2].ToArray();
-			eliminate = "bottom";
-		}
-		else if (eliminate == "bottom") {
-			resumes = resumes[resumes.Length/2..resumes.Length].ToArray();
-			eliminate = "top";
-		}
-	}
+    while (resumes.Length > 1)
+    {
+        int mid = resumes.Length / 2;
+        if (eliminate == "top")
+        {
+            resumes = resumes[..mid];
+            eliminate = "bottom";
+        }
+        else
+        {
+            resumes = resumes[mid..]; 
+            eliminate = "top";
+        }
+    }
 
-	return resumes;
-
+    return resumes[0];
 }
 
-PrintElements(PickResume["A", "B", "C", "D", "E"]);
+Console.WriteLine(PickResume(["A", "B", "C", "D", "E", "F", "G", "H", "I"]));
 
 
 
