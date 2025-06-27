@@ -215,11 +215,24 @@ long FindLargestProduct(int[] numbers) {
 //Console.WriteLine(FindLargestProduct([1,2,3,4,5,6,7,8,9,10]));
 //Ex7.5
 object[] PickResume(object[] resumes) {
+	var eliminate = "top";
 
+	while (resumes != null && resumes.Length > 1) {
+		if (eliminate == "top") {
+			resumes = resumes[0..resumes.Length/2].ToArray();
+			eliminate = "bottom";
+		}
+		else if (eliminate == "bottom") {
+			resumes = resumes[resumes.Length/2..resumes.Length].ToArray();
+			eliminate = "top";
+		}
+	}
 
+	return resumes;
 
 }
 
+PrintElements(PickResume["A", "B", "C", "D", "E"]);
 
 
 
