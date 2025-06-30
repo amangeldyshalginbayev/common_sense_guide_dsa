@@ -17,7 +17,7 @@ class Stack<T> {
     public T Pop()
     {
         if (Data.Count == 0)
-            throw new InvalidOperationException("Stack is empty.");
+            return default(T);
 
         T last = Data[^1];
         Data.RemoveAt(Data.Count - 1);
@@ -29,3 +29,15 @@ class Stack<T> {
         return Data.LastOrDefault();
     }
 }
+
+class Linter<T> {
+    private Stack<T> Stack { get; set; }
+
+    public Linter() {
+        Stack = new Stack<T>();
+    }
+
+    
+}
+
+
