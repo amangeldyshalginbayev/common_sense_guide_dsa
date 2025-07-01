@@ -1,8 +1,13 @@
-﻿var linter = new Linter();
+﻿
+//var linter = new Linter();
+//Console.WriteLine(linter.Lint("( var x = { y: [1, 2, 3] } )"));
+//Console.WriteLine(linter.Lint("( var x = ) y: {1, 2, 3} ( ) []"));
 
-Console.WriteLine(linter.Lint("( var x = { y: [1, 2, 3] } )"));
-Console.WriteLine(linter.Lint("( var x = ) y: {1, 2, 3} ( ) []"));
-
+var printManager = new PrintManager();
+printManager.QueuePrintJob("First Document");
+printManager.QueuePrintJob("Second Document");
+printManager.QueuePrintJob("Third Document");
+printManager.Run();
 
 class Stack<T> {
 	private List<T> Data { get; set; }
@@ -85,5 +90,51 @@ class Linter {
     }
 }
 
+class Queue<T> {
+    private List<T> Data { get; set; }
+
+    public Queue()
+    {
+        Data = new List<T>();
+    }
+
+    public void Enqueue(T element) {
+        Data.Add(element);
+    }
+
+    public T Dequeue() {
+        var first = Data[0];
+        Data.RemoveAt(0);
+        return first;
+    }
+
+    public T Read() {
+        return Data.FirstOrDefault();
+    }
+
+}
+
+class PrintManager {
+    private Queue<string> Data { get; set; }
+
+    public PrintManager() {
+        Data = new Queue<string>();
+    }
+
+    public void QueuePrintJob(string document) {
+        Data.Enqueue(document);
+    }
+
+    public void Run() {
+        while (Data.Read() != null) {
+            Print(Data.Dequeue());
+        }
+    }
+
+    private void Print(string document) {
+        Console.WriteLine(document);
+    }
+
+}
 
 
