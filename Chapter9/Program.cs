@@ -1,4 +1,7 @@
-﻿Console.WriteLine("Chapter9");
+﻿var linter = new Linter();
+
+Console.WriteLine(linter.Lint("( var x = { y: [1, 2, 3] } )"));
+Console.WriteLine(linter.Lint("( var x = ) y: {1, 2, 3} ( ) []"));
 
 
 class Stack<T> {
@@ -30,14 +33,57 @@ class Stack<T> {
     }
 }
 
-class Linter<T> {
-    private Stack<T> Stack { get; set; }
+class Linter {
+    private Stack<char> Stack { get; set; }
 
     public Linter() {
-        Stack = new Stack<T>();
+        Stack = new Stack<char>();
     }
 
-    
+    public string Lint(string text) {
+        foreach (var c in text) {
+            if (IsOpeningBrace(c)) {
+                Stack.Push(c);
+            }
+            else if (IsClosingBrace(c)) {
+                var top = Stack.Pop();
+
+                if (top == default(char)) {
+                    return $"'{c}' does not have opening brace";
+                }
+
+                if (IsNotMatch(top, c)) {
+                    return $"'{c}' has mismatched opening brace";
+                }
+            }
+        }
+
+        var value = Stack.Read();
+
+        if (value != default(char)) {
+            return $"'{value}' does not have closing brace";
+        }
+
+        return "No issue found";
+    }
+
+    private bool IsOpeningBrace(char c) {
+        return c == '(' || c == '[' || c == '{';
+    }
+
+    private bool IsClosingBrace(char c) {
+        return c == ')' || c == ']' || c == '}';
+    }
+
+    private bool IsNotMatch(char opening, char closing) {
+        return closing != new Dictionary<char, char>
+        {
+            { '(', ')' },
+            { '[', ']' },
+            { '{', '}' }
+        }[opening];
+    }
 }
+
 
 
