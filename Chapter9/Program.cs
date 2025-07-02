@@ -1,7 +1,8 @@
-﻿
-//var linter = new Linter();
-//Console.WriteLine(linter.Lint("( var x = { y: [1, 2, 3] } )"));
-//Console.WriteLine(linter.Lint("( var x = ) y: {1, 2, 3} ( ) []"));
+﻿using System.Text;
+
+var linter = new Linter();
+Console.WriteLine(linter.Lint("( var x = { y: [1, 2, 3] } )"));
+Console.WriteLine(linter.Lint("( var x = ) y: {1, 2, 3} ( ) []"));
 
 var printManager = new PrintManager();
 printManager.QueuePrintJob("First Document");
@@ -9,13 +10,59 @@ printManager.QueuePrintJob("Second Document");
 printManager.QueuePrintJob("Third Document");
 printManager.Run();
 
+//Ex9.1
+//A queue is a First-In, First-Out (FIFO) data structure. This means that the first caller to be placed on hold will be the first one to be assigned to a 
+//representative. This is how most real-world waiting systems (including call centers) work: people are served in the order they arrive.
+
+//Ex9.2
+var stack = new Stack<int>();
+Enumerable.Range(1, 6).ToList().ForEach(i => stack.Push(i));
+Console.WriteLine(stack.Read());
+stack.Pop();
+stack.Pop();
+Console.WriteLine(stack.Read());
+
+
+//Ex9.3
+var queue = new Queue<int>();
+Enumerable.Range(1, 6).ToList().ForEach(i => queue.Enqueue(i));
+queue.Dequeue();
+queue.Dequeue();
+Console.WriteLine(queue.Read());
+
+//Ex9.4
+Console.WriteLine("-----");
+Console.WriteLine(ReverseWord(""));
+Console.WriteLine(ReverseWord("Aman"));
+Console.WriteLine(ReverseWord("Abba"));
+Console.WriteLine(ReverseWord("kaZan"));
+string ReverseWord(string word) {
+    var stack = new Stack<char>();
+    
+    foreach (var c in word) {
+        stack.Push(c);
+    }
+
+    var reversed = new StringBuilder();
+
+    while (stack.Count > 0) {
+        reversed.Append($"{stack.Pop()}");
+    }
+
+    return reversed.ToString();
+}
+
+
 class Stack<T> {
 	private List<T> Data { get; set; }
+    public int Count => Data.Count;
 
     public Stack()
     {
         Data = new List<T>();
     }
+
+    
 
     public void Push(T element)
     {
