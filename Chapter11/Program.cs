@@ -69,7 +69,15 @@ int FindIndex(string word, int index = 0)
 }
 
 //Ex11.5
-
+Console.WriteLine("Unique Paths Count >");
+Console.WriteLine(CountUniquePaths(3, 7));
+int CountUniquePaths(int rows, int cols) {
+	if (rows == 1 || cols == 1) {
+		return 1;
+	}
+	
+	return CountUniquePaths(rows - 1, cols) + CountUniquePaths(rows, cols - 1);	
+}
 
 
 
