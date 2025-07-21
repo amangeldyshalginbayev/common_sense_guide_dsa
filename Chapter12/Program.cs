@@ -33,9 +33,9 @@ int FindFibNumber(int n, ref int count) {
 	return FindFibNumber(n-1, ref count) + FindFibNumber(n-2, ref count);
 }
 
-callCount = 0;
-Console.WriteLine(FindFibNumberMemo(6, ref callCount, new Dictionary<int, int>()));
-Console.WriteLine($"FindFibNumberMemo() called {callCount} times");
+//callCount = 0;
+//Console.WriteLine(FindFibNumberMemo(6, ref callCount, new Dictionary<int, int>()));
+//Console.WriteLine($"FindFibNumberMemo() called {callCount} times");
 int FindFibNumberMemo(int n, ref int count, Dictionary<int, int> memo) {
 	count++;
 	if (n == 0 || n == 1) {
@@ -47,4 +47,21 @@ int FindFibNumberMemo(int n, ref int count, Dictionary<int, int> memo) {
 	}
 
 	return memo[n];
+}
+
+int FindFibIterative(int n) {
+	if (n == 0) {
+		return 0;
+	}
+
+	var a = 0;
+	var b = 1;
+
+	for (var i = 1; i < n; i++) {
+		var temp = a;
+		a = b;
+		b = temp + a;
+	}
+	
+	return b;
 }
