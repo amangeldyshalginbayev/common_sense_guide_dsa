@@ -89,9 +89,9 @@ int FindSum(int[] numbers) {
 }
 
 
-Console.WriteLine(FindSumFixed([90,20,80]));
-Console.WriteLine(FindSumFixed([10,20,30]));
-Console.WriteLine(FindSumFixed([90,5,8,4]));
+//Console.WriteLine(FindSumFixed([90,20,80]));
+//Console.WriteLine(FindSumFixed([10,20,30]));
+//Console.WriteLine(FindSumFixed([290,5,8,4]));
 
 int FindSumFixed(int[] numbers, int currentSum = 0) {
 	if (numbers == null || numbers.Length == 0) {
@@ -104,10 +104,22 @@ int FindSumFixed(int[] numbers, int currentSum = 0) {
 	else {
 		return FindSumFixed(numbers[1..], currentSum + numbers[0]);
 	}
-
 }
 
+//Ex12.2
+int FindGolomb(int n, Dictionary<int, int> memo) {
+	if (n == 1) {
+		return 1;
+	}
 
+	if (memo.ContainsKey(n)) {
+		return memo[n];
+	}
+	else {
+		var golombNMinusOne = memo.ContainsKey(n-1) ? memo[n-1] : FindGolomb(n-1)
+	}
+
+}
 
 
 
