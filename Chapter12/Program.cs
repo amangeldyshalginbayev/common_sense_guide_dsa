@@ -21,8 +21,8 @@ int FindMax(int[] numbers, ref int callCount) {
 }
 
 var callCount = 0;
-Console.WriteLine(FindFibNumber(6, ref callCount));
-Console.WriteLine($"FinFibNumber() called {callCount} times");
+//Console.WriteLine(FindFibNumber(6, ref callCount));
+//Console.WriteLine($"FinFibNumber() called {callCount} times");
 
 int FindFibNumber(int n, ref int count) {
 	count++;
@@ -49,6 +49,8 @@ int FindFibNumberMemo(int n, ref int count, Dictionary<int, int> memo) {
 	return memo[n];
 }
 
+//Console.WriteLine("Iterative Fib number finder");
+//Console.WriteLine(FindFibIterative(6));
 int FindFibIterative(int n) {
 	if (n == 0) {
 		return 0;
@@ -65,3 +67,51 @@ int FindFibIterative(int n) {
 	
 	return b;
 }
+
+//Ex12.1
+//Console.WriteLine(FindSum([90,20,80]));
+//Console.WriteLine(FindSum([10,20,30]));
+//Console.WriteLine(FindSum([90,5,8,4]));
+
+int FindSum(int[] numbers) {
+	if (numbers == null || numbers.Length == 0) {
+		return 0;
+	}
+
+	var sumOfRest = FindSum(numbers[1..]);
+
+	if ((numbers[0] + sumOfRest) > 100) {
+		return sumOfRest;
+	}
+	else {
+		return numbers[0] + sumOfRest;
+	}
+}
+
+
+Console.WriteLine(FindSumFixed([90,20,80]));
+Console.WriteLine(FindSumFixed([10,20,30]));
+Console.WriteLine(FindSumFixed([90,5,8,4]));
+
+int FindSumFixed(int[] numbers, int currentSum = 0) {
+	if (numbers == null || numbers.Length == 0) {
+		return currentSum;
+	}
+
+	if (currentSum + numbers[0] > 100) {
+		return FindSumFixed(numbers[1..], currentSum);
+	}
+	else {
+		return FindSumFixed(numbers[1..], currentSum + numbers[0]);
+	}
+
+}
+
+
+
+
+
+
+
+
+
