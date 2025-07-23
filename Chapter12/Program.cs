@@ -107,18 +107,40 @@ int FindSumFixed(int[] numbers, int currentSum = 0) {
 }
 
 //Ex12.2
+//Console.WriteLine(FindGolomb(12, new Dictionary<int, int>()));
 int FindGolomb(int n, Dictionary<int, int> memo) {
 	if (n == 1) {
 		return 1;
 	}
 
-	if (memo.ContainsKey(n)) {
-		return memo[n];
+	if (memo.TryGetValue(n, out int cached)) {
+		return cached;
 	}
-	else {
-		var golombNMinusOne = memo.ContainsKey(n-1) ? memo[n-1] : FindGolomb(n-1)
+    	
+	var golombN = 1 + FindGolomb(n - FindGolomb(FindGolomb(n - 1, memo), memo), memo);
+
+	memo.Add(n, golombN);
+
+	return golombN;
+
+}
+
+//Ex12.3
+Console.WriteLine(CountUniquePaths(3, 7, new Dictionary<(int, int), int>()));
+int CountUniquePaths(int rows, int columns, Dictionary<(int, int), int> memo) {
+	if (rows == 1 || columns == 1) {
+		return 1;
 	}
 
+	if (memo.TryGetValue((rows, columns), out int cached)) {
+		return cached;
+	}
+
+	var result = CountUniquePaths(rows - 1, columns, memo) + CountUniquePaths(rows, columns - 1, memo);
+
+	memo[(rows, columns)] = result;
+
+	return result;
 }
 
 
