@@ -79,8 +79,19 @@ public class LinkedList
 
     
     // Ex 14.4
-    public Reverse() {
-        
+    public void Reverse() {
+        Node previousNode = null;
+        var currentNode = FirstNode;
+
+        while (currentNode != null) {
+            var nextNode = currentNode.nextNode;
+
+            currentNode.NextNode = previousNode;
+            previousNode = currentNode;
+            currentNode = nextNode;
+        }
+
+        FirstNode = previousNode;
     }
 
 
