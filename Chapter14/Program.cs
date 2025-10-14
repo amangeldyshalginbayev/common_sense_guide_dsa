@@ -1,4 +1,13 @@
-﻿var node1 = new Node("once");
+﻿
+// Ex14.5
+// Works unless node is tail
+static void DeleteNode(Node node) {
+    node.Data = node.NextNode.Data;
+    node.NextNode = node.NextNode.NextNode;
+}
+
+
+var node1 = new Node("once");
 var node2 = new Node("upon");
 var node3 = new Node("a");
 var node4 = new Node("time");
@@ -84,7 +93,7 @@ public class LinkedList
         var currentNode = FirstNode;
 
         while (currentNode != null) {
-            var nextNode = currentNode.nextNode;
+            var nextNode = currentNode.NextNode;
 
             currentNode.NextNode = previousNode;
             previousNode = currentNode;
