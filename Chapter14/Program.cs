@@ -1,6 +1,7 @@
 ﻿
 // Ex14.5
 // Works unless node is tail
+// Deletes node from classic linked list
 static void DeleteNode(Node node) {
     node.Data = node.NextNode.Data;
     node.NextNode = node.NextNode.NextNode;
