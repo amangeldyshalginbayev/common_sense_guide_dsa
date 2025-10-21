@@ -6,6 +6,33 @@ var node2 = new TreeNode(75);
 var root = new TreeNode(50, node1, node2);
 
 static TreeNode Delete(int value, TreeNode node) {
+	if (node == null) {
+		return null;
+	}
+	
+	if (value < node.Value) {
+
+	}
+
+	else if (value > node.Value) {
+
+	}
+
+	else if (value == Node.value) {
+		if (node.LeftChild == null) {
+			return node.RightChild;
+		}
+		else if (node.RightChild == null) {
+			return node.LeftChild;
+		}
+		else {
+			node.RightChild = Lift(node.RightChild, node);
+			return node;
+		}
+	}
+}
+
+static TreeNode Lift(TreeNode node, TreeNode nodeToDelete) {
 	
 }
 
