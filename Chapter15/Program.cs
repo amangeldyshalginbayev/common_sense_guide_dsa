@@ -4,12 +4,47 @@ Console.WriteLine("");
 var node1 = new TreeNode(25);
 var node2 = new TreeNode(75);
 var root = new TreeNode(50, node1, node2);
+Delete(50, root);
+Console.WriteLine("stop here");
 
-static TreeNode Delete(int value, TreeNode node) {
-	
+static void TraverseAndPrint(TreeNode node) {
+	if (node == null) {
+		return;
+	}
 }
 
-static Node FindMind(TreeNode node) {
+static TreeNode Delete(int value, TreeNode node) {
+	if (node == null) {
+		return null;
+	}
+	else if (value > node.Value) {
+		node.RightChild = Delete(value, node.RightChild);
+	}
+	else if (value < node.Value) {
+		node.LeftChild = Delete(value, node.LeftChild);
+	}
+	else {
+		// value == node.Value
+		if (node.LeftChild == null) {
+			return node.RightChild;
+		}
+		else if (node.RightChild == null) {
+			return node.LeftChild;
+		}
+		else {
+			// node has both children, so need to replace it with successor node
+			var minNode = FindMin(node.RightChild);
+			var minValue = minNode.Value;
+			node.Value = minValue;
+			node.RightChild = Delete(minValue, node.RightChild);
+		}
+	
+	}
+
+	return node;
+}
+
+static TreeNode FindMin(TreeNode node) {
 	while (node.LeftChild != null) {
 		node = node.LeftChild;
 	}
@@ -17,9 +52,9 @@ static Node FindMind(TreeNode node) {
 }
 
 
-static TreeNode Insert(value, node) {
+static void Insert(int value, TreeNode node) {
 	if (value == node.Value) {
-		throw new IllegalArgumentException("Value already exists.");
+		throw new ArgumentException("Value already exists.");
 	}
 	else if (value < node.Value) {
 		if (node.LeftChild == null) {

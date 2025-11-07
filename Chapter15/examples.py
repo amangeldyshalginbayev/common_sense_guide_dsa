@@ -69,6 +69,15 @@ def find_min(node):
     return node
 
 
+def traverse_and_print(node):
+    if node is None:
+        return
+    traverse_and_print(node.leftChild)   # Step 1: Go left
+    print(node.value)                    # Step 2: Visit current node
+    traverse_and_print(node.rightChild)  # Step 3: Go right
+
+
+
 	
 
 
