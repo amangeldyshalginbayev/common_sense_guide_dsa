@@ -6,35 +6,16 @@ var node2 = new TreeNode(75);
 var root = new TreeNode(50, node1, node2);
 
 static TreeNode Delete(int value, TreeNode node) {
-	if (node == null) {
-		return null;
-	}
-	
-	if (value < node.Value) {
-
-	}
-
-	else if (value > node.Value) {
-
-	}
-
-	else if (value == Node.value) {
-		if (node.LeftChild == null) {
-			return node.RightChild;
-		}
-		else if (node.RightChild == null) {
-			return node.LeftChild;
-		}
-		else {
-			node.RightChild = Lift(node.RightChild, node);
-			return node;
-		}
-	}
-}
-
-static TreeNode Lift(TreeNode node, TreeNode nodeToDelete) {
 	
 }
+
+static Node FindMind(TreeNode node) {
+	while (node.LeftChild != null) {
+		node = node.LeftChild;
+	}
+	return node;
+}
+
 
 static TreeNode Insert(value, node) {
 	if (value == node.Value) {
@@ -48,7 +29,7 @@ static TreeNode Insert(value, node) {
 			Insert(value, node.LeftChild);
 		}
 	}
-	else {
+	else { // value > node.Value
 		if (node.RightChild == null) {
 			node.RightChild = new TreeNode(value);
 		}
@@ -58,7 +39,6 @@ static TreeNode Insert(value, node) {
 	}
 }
 	
-
 static TreeNode Search(int value, TreeNode node) {
 	if (node == null || node.Value == value) {
 		return node;
