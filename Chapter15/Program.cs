@@ -1,17 +1,38 @@
 ﻿
-Console.WriteLine("");
+//Console.WriteLine("");
 
-var node1 = new TreeNode(25);
-var node2 = new TreeNode(75);
-var root = new TreeNode(50, node1, node2);
-Delete(50, root);
-Console.WriteLine("stop here");
+//var node1 = new TreeNode(25);
+//var node2 = new TreeNode(75);
+//var root = new TreeNode(50, node1, node2);
+//Delete(50, root);
+//Console.WriteLine("stop here");
+
+
+// Ex 15.1
+var rootNode1 = new TreeNode(1);
+var values = new List<int>{5, 9, 2, 4, 10, 6, 3, 8};
+values.ForEach(v => Insert(v, rootNode1));
+TraverseAndPrint(rootNode1);
 
 static void TraverseAndPrint(TreeNode node) {
 	if (node == null) {
 		return;
 	}
+
+	TraverseAndPrint(node.LeftChild);
+	Console.WriteLine(node.Value);
+	TraverseAndPrint(node.RightChild);
 }
+
+// Ex 15.2
+/*
+If a well-balanced binary search tree contains 1,000 values, what is the
+maximum number of steps it would take to search for a value within it?
+log(1000) = 10
+*/
+
+// Ex 15.3
+
 
 static TreeNode Delete(int value, TreeNode node) {
 	if (node == null) {
