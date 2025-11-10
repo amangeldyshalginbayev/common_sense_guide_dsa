@@ -14,6 +14,7 @@ var values = new List<int>{5, 9, 2, 4, 10, 6, 3, 8};
 values.ForEach(v => Insert(v, rootNode1));
 TraverseAndPrint(rootNode1);
 
+
 static void TraverseAndPrint(TreeNode node) {
 	if (node == null) {
 		return;
@@ -32,6 +33,43 @@ log(1000) = 10
 */
 
 // Ex 15.3
+Console.WriteLine($"Greatest value => {FindGreatest(rootNode1)}");
+static int FindGreatest(TreeNode root) {
+	
+	while (root != null && root.RightChild != null) {
+		root = root.RightChild;
+	}
+	return root.Value;
+}
+
+// Ex 15.4
+var rootNode2 = new TreeNode(15);
+var values2 = new List<int>{10, 17, 2, 12, 16, 20};
+values2.ForEach(v => Insert(v, rootNode2));
+Console.WriteLine("Pre Order =>");
+TraverseAndPrintPreOrder(rootNode2);
+
+static void TraverseAndPrintPreOrder(TreeNode node) {
+	if (node == null) {
+		return;
+	}
+	Console.WriteLine(node.Value);
+	TraverseAndPrintPreOrder(node.LeftChild);
+	TraverseAndPrintPreOrder(node.RightChild);
+}
+
+// Ex 15.5
+Console.WriteLine("Post order => ");
+TraverseAndPrintPostOrder(rootNode2);
+static void TraverseAndPrintPostOrder(TreeNode node) {
+	if (node == null) {
+		return;
+	}
+	TraverseAndPrintPostOrder(node.LeftChild);
+	TraverseAndPrintPostOrder(node.RightChild);
+	Console.WriteLine(node.Value);
+}
+
 
 
 static TreeNode Delete(int value, TreeNode node) {
