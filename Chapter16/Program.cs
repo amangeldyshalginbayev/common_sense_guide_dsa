@@ -1,4 +1,7 @@
-﻿
+﻿using Common;
+
+Console.WriteLine("HELLO!");
+
 
 class Heap
 {
@@ -35,13 +38,40 @@ class Heap
         }
     }
 
-	void Delete() {
-		Data[0] = Data[Count - 1];
-		Data.RemoveAt(Data.Count - 1);
+    void Delete()
+    {
+        var lastIndex = Data.Count - 1;
+        Data[0] = Data[lastIndex];
+        Data.RemoveAt(lastIndex);
 
-		
+        var trickleNodeIndex = 0;
 
-				
+        // Trickle down algorithm
+        while (HasGreaterChild(trickleNodeIndex))
+        {
+            var largerChildIndex = FindLargerChildIndex(trickleNodeIndex);
+            
+            (Data[trickleNodeIndex], Data[largerChildIndex]) = (Data[largerChildIndex], Data[trickleNodeIndex]);
+            
+            trickleNodeIndex = largerChildIndex;
+        }
+        bool HasGreaterChild(int index)
+        {
+            return (Data.TryGet(LeftChildIndex(index), out var lcValue) && lcValue > Data[index]) ||
+                   (Data.TryGet(RightChildIndex(index), out var rcValue) && rcValue > Data[index]);
+        }
+        
+        int FindLargerChildIndex(int index)
+        {
+            var leftChildExists = Data.TryGet(LeftChildIndex(index), out var lcValue);
+            var rightChildExists = Data.TryGet(RightChildIndex(index), out var rcValue);
 
-	}
+            if (leftChildExists && rightChildExists)
+            {
+                return lcValue > rcValue ? LeftChildIndex(index) : RightChildIndex(index);
+            }
+
+            return rightChildExists ? RightChildIndex(index) : LeftChildIndex(index);
+        }
+    }
 }
