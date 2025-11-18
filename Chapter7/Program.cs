@@ -1,4 +1,4 @@
-﻿using  static Common.Helper;
+﻿using  Common;
 
 double FindAverageOfEvenNumbers(int[] numbers) {
 	double average = -1;

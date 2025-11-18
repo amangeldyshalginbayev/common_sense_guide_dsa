@@ -2,10 +2,35 @@
 
 Console.WriteLine("HELLO!");
 
+// Ex 16.1
+var heap = new Heap
+{
+    Data = [10, 9, 8, 6, 5, 7, 4, 2, 1, 3]
+};
+heap.Print();
+heap.Insert(11);
+heap.Print();
+
+// Ex 16.2
+heap.Delete();
+heap.Print();
+
+heap = new Heap();
+var numbers = new List<int>  {55, 22, 34, 10, 2, 99, 68};
+numbers.ForEach(n => heap.Insert(n));
+Console.WriteLine("Initial Heap: ");
+heap.Print();
+var result = new List<int>();
+while (heap.HasValue)
+{
+    result.Add(heap.Pop());
+}
+Console.WriteLine("Result array: ");
+result.PrintElements();
 
 class Heap
 {
-    List<int> Data = [];
+    public List<int> Data = [];
 
     int RootNode => Data.First();
 
@@ -17,7 +42,7 @@ class Heap
 
     int ParentIndex(int index) => (index - 1) / 2;
 
-    void Insert(int value)
+    public void Insert(int value)
     {
         // Insert as Last Node
         Data.Add(value);
@@ -38,7 +63,7 @@ class Heap
         }
     }
 
-    void Delete()
+    public void Delete()
     {
         var lastIndex = Data.Count - 1;
         Data[0] = Data[lastIndex];
@@ -55,12 +80,14 @@ class Heap
             
             trickleNodeIndex = largerChildIndex;
         }
+        // Checks whether there is a child node with greater value than the current node
         bool HasGreaterChild(int index)
         {
             return (Data.TryGet(LeftChildIndex(index), out var lcValue) && lcValue > Data[index]) ||
                    (Data.TryGet(RightChildIndex(index), out var rcValue) && rcValue > Data[index]);
         }
         
+        // Function assumes that there is a child node when called
         int FindLargerChildIndex(int index)
         {
             var leftChildExists = Data.TryGet(LeftChildIndex(index), out var lcValue);
@@ -73,5 +100,25 @@ class Heap
 
             return rightChildExists ? RightChildIndex(index) : LeftChildIndex(index);
         }
+    }
+
+    public void Print()
+    {
+        Data.PrintElements();
+    }
+    
+    public bool HasValue => Data.Count > 0;
+
+    public int Pop()
+    {
+        var topExists = Data.TryGet(0, out var value);
+        
+        if (topExists)
+        {
+            Delete();
+            return value;
+        }
+        
+        throw new InvalidOperationException("Heap is empty.");
     }
 }

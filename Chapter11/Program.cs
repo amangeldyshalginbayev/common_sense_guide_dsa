@@ -1,4 +1,4 @@
-﻿using static Common.Helper;
+﻿using Common;
 
 
 //int[] numbers = [1,2,3];
@@ -21,7 +21,7 @@ int CountCharacters(string[] words) {
 		return 0;
 	}
 
-	PrintElements(words[1..]);
+	words[1..].PrintElements();
 	return words[0].Length + CountCharacters(words[1..]);
 }
 

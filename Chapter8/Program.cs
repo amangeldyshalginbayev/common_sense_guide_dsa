@@ -1,4 +1,4 @@
-﻿using static Common.Helper;
+﻿using Common;
 
 //Ex8.1
 // O(N+M), N - numbers1 length, M - numbers2 length

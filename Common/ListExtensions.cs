@@ -22,4 +22,21 @@ public static class ListExtensions
         value = default!;
         return false;
     }
+    
+    /// <summary>
+    /// Prints the elements of a collection to the console.
+    /// </summary>
+    /// <param name="elements"></param>
+    /// <typeparam name="T"></typeparam>
+    public static void PrintElements<T>(this IEnumerable<T> elements)
+    {
+        Console.WriteLine("S");
+        Console.Write("[ ");
+        foreach (var element in elements)
+        {
+            Console.Write($"{element} ");
+        }
+        Console.Write(" ] ");
+        Console.WriteLine("E");
+    } 
 }

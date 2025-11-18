@@ -1,4 +1,4 @@
-﻿using  static Common.Helper;
+﻿using Common;
 
 int[] InsertionSort(int[] numbers) {
 	for (var i = 1; i < numbers.Length; i++) {
@@ -20,7 +20,7 @@ int[] InsertionSort(int[] numbers) {
 	return numbers;
 }
 
-PrintElements(InsertionSort([1,-1,-123,0,5,2,126,8,12,-1288712]));
+InsertionSort([1,-1,-123,0,5,2,126,8,12,-1288712]).PrintElements();
 
 // Ex6.1
 // 3N^2 + 2N + 1 = O(N^2)
