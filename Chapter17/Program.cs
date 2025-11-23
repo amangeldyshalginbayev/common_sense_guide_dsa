@@ -1,4 +1,4 @@
-﻿// See https://aka.ms/new-console-template for more information
+﻿
 
 Console.WriteLine("Hello, World!");
 
@@ -28,4 +28,30 @@ class Trie
 
         return currentNode;
     }
+
+    void Insert(string word) {
+        var currentNode = Root;
+        var index = 0;
+        var lastIndex = word.Length - 1;
+
+        foreach(var c in word) {
+            index++;
+            if (currentNode.Children.TryGetValue(c, out var val)) {
+                currentNode = val;
+            }
+            else {
+                var newNode = new TrieNode();
+                currentNode.Children.Add(c, newNode);
+                currentNode = newNode;
+                if (index == lastIndex) {
+                    currentNode.Children.Add('*', null);
+                }
+            
+            }
+        }
+    }
+
+    
+
+
 }
