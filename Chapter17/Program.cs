@@ -1,6 +1,17 @@
 ﻿
 
+using System.IO.Compression;
+
+
+
 Console.WriteLine("Hello, World!");
+
+var trie = new Trie();
+trie.Insert("abc");
+trie.Insert("bde");
+Console.WriteLine("tst");
+var words = trie.CollectAllWords();
+Console.WriteLine();
 
 class TrieNode
 {
@@ -11,7 +22,7 @@ class Trie
 {
     TrieNode Root { get; set; } = new();
 
-    TrieNode Search(string word)
+    public TrieNode Search(string word)
     {
         var currentNode = Root;
         foreach (var c in word)
@@ -29,7 +40,7 @@ class Trie
         return currentNode;
     }
 
-    void Insert(string word) {
+    public void Insert(string word) {
         var currentNode = Root;
         var index = 0;
         var lastIndex = word.Length - 1;
@@ -51,23 +62,27 @@ class Trie
         }
     }
 
-    List<string> CollectAllWords(TrieNode node=null, string word="", List<string> words=[]) {
+    public List<string> CollectAllWords(TrieNode node=null, string word="", List<string> words = null) {
         var currentNode = node ?? Root;
-
+        words = words ?? [];
+        
         foreach (var keyValue in currentNode.Children) {
+            Console.WriteLine(keyValue.Key);
             if (keyValue.Key == '*') {
                 words.Add(word);
             }
             else {
-                CollecAllWords(keyValue.Value.Children, word+keyValue.Key, words);
+                CollectAllWords(keyValue.Value, word+keyValue.Key, words);
             }
         }
         
         return words;
 
     }
-
     
+    
+
+
 
 
 }
