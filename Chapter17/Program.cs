@@ -51,6 +51,22 @@ class Trie
         }
     }
 
+    List<string> CollectAllWords(TrieNode node=null, string word="", List<string> words=[]) {
+        var currentNode = node ?? Root;
+
+        foreach (var keyValue in currentNode.Children) {
+            if (keyValue.Key == '*') {
+                words.Add(word);
+            }
+            else {
+                CollecAllWords(keyValue.Value.Children, word+keyValue.Key, words);
+            }
+        }
+        
+        return words;
+
+    }
+
     
 
 
