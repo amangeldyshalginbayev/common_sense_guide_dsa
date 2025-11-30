@@ -1,10 +1,13 @@
-﻿Console.WriteLine("Hello, World!");
+﻿using Common;
+
+Console.WriteLine("Hello, World!");
 
 var trie = new Trie();
-trie.Insert("abc");
-trie.Insert("bde");
-Console.WriteLine("tst");
+trie.Insert("a");
+trie.Insert("ab");
 var words = trie.CollectAllWords();
+words.PrintElements();
+
 Console.WriteLine();
 
 class TrieNode
@@ -27,6 +30,10 @@ class Trie
             currentNode = next;
         }
 
+        // return part of word match
+        // return currentNode;
+        
+        // return exact word match
         return currentNode.Children.ContainsKey('*') ? currentNode : null;
     }
 
@@ -56,17 +63,19 @@ class Trie
 
         foreach (var keyValue in currentNode.Children)
         {
-            Console.WriteLine(keyValue.Key);
             if (keyValue.Key == '*')
             {
                 words.Add(word);
+                //Console.WriteLine(word);
             }
             else
             {
+                //Console.WriteLine(keyValue.Key);
                 CollectAllWords(keyValue.Value, word + keyValue.Key, words);
             }
         }
 
+        Console.WriteLine($"Hitting return > {words.Count}");
         return words;
     }
 }

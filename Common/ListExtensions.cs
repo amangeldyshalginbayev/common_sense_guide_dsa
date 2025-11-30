@@ -30,13 +30,18 @@ public static class ListExtensions
     /// <typeparam name="T"></typeparam>
     public static void PrintElements<T>(this IEnumerable<T> elements)
     {
-        Console.WriteLine("S");
+        Console.WriteLine("");
         Console.Write("[ ");
+        var index = 0;
+        var count = elements.Count();
+        
         foreach (var element in elements)
         {
-            Console.Write($"{element} ");
+            var colon = index + 1 < count ? "," : string.Empty;
+            Console.Write($"{element}{colon} ");
+            index++;
         }
-        Console.Write(" ] ");
-        Console.WriteLine("E");
+        Console.Write("]");
+        Console.WriteLine("");
     } 
 }
