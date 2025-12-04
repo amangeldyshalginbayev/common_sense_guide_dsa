@@ -10,6 +10,27 @@ words.PrintElements();
 
 Console.WriteLine();
 
+
+// Ex17.1
+/*
+ * tag, tan, tank, tap, today, total, we, well, went
+ */
+
+// Ex17.2
+Console.WriteLine("Ex 17.2");
+trie = new Trie();
+trie.Insert("get");
+trie.Insert("go");
+trie.Insert("got");
+trie.Insert("gotten");
+trie.Insert("hall");
+trie.Insert("ham");
+trie.Insert("hammer");
+trie.Insert("hill");
+trie.Insert("zebra");
+trie.CollectAllWords().PrintElements();
+
+
 class TrieNode
 {
     public Dictionary<char, TrieNode> Children { get; set; } = new();
@@ -30,11 +51,11 @@ class Trie
             currentNode = next;
         }
 
-        // return part of word match
-        // return currentNode;
-        
+        //return part of word/prefix match
+        return currentNode;
+
         // return exact word match
-        return currentNode.Children.ContainsKey('*') ? currentNode : null;
+        //return currentNode.Children.ContainsKey('*') ? currentNode : null;
     }
 
     public void Insert(string word)
@@ -51,7 +72,7 @@ class Trie
 
             currentNode = next;
         }
-        
+
         if (!currentNode.Children.ContainsKey('*'))
             currentNode.Children['*'] = new TrieNode();
     }
@@ -78,4 +99,22 @@ class Trie
         Console.WriteLine($"Hitting return > {words.Count}");
         return words;
     }
+
+    /// <summary>
+    /// When user types a prefix, return all words that start with that prefix
+    /// </summary>
+    /// <param name="prefix"></param>
+    /// <returns></returns>
+    public List<string> AutoComplete(string prefix)
+    {
+        var currentNode = Search(prefix);
+        var words = new List<string>();
+        if (currentNode != null)
+        {
+            words = CollectAllWords(currentNode);
+        }
+
+        return words;
+    }
 }
+
