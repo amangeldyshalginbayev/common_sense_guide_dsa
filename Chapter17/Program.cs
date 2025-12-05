@@ -17,18 +17,29 @@ Console.WriteLine();
  */
 
 // Ex17.2
-Console.WriteLine("Ex 17.2");
-trie = new Trie();
-trie.Insert("get");
-trie.Insert("go");
-trie.Insert("got");
-trie.Insert("gotten");
-trie.Insert("hall");
-trie.Insert("ham");
-trie.Insert("hammer");
-trie.Insert("hill");
-trie.Insert("zebra");
-trie.CollectAllWords().PrintElements();
+// Console.WriteLine("Ex 17.2");
+// trie = new Trie();
+// trie.Insert("get");
+// trie.Insert("go");
+// trie.Insert("got");
+// trie.Insert("gotten");
+// trie.Insert("hall");
+// trie.Insert("ham");
+// trie.Insert("hammer");
+// trie.Insert("hill");
+// trie.Insert("zebra");
+// trie.CollectAllWords().PrintElements();
+
+//Ex 17.3
+// Console.WriteLine("Ex 17.3");
+// trie = new Trie();
+// trie.Insert("a");
+// trie.Insert("ab");
+// trie.Insert("f");
+// trie.PrintKeys();
+
+//Ex 17.4
+Console.WriteLine("Ex 17.4");
 
 
 class TrieNode
@@ -115,6 +126,20 @@ class Trie
         }
 
         return words;
+    }
+
+    public void PrintKeys(TrieNode node = null)
+    {
+        var currentNode = node ?? Root;
+
+        foreach (var keyNode in currentNode.Children)
+        {
+            Console.Write($" {keyNode.Key}");
+            if (keyNode.Key != '*')
+            {
+                PrintKeys(keyNode.Value);
+            }
+        }
     }
 }
 
