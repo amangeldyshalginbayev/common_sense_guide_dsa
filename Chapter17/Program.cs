@@ -40,7 +40,13 @@ Console.WriteLine();
 
 //Ex 17.4
 Console.WriteLine("Ex 17.4");
-
+trie = new Trie();
+trie.Insert("cat");
+trie.Insert("catnar");
+trie.Insert("catnip");
+Console.WriteLine(trie.AutoCorrectUpdated("cat"));
+Console.WriteLine(trie.AutoCorrectUpdated("catn"));
+Console.WriteLine(trie.AutoCorrectUpdated("cas"));
 
 class TrieNode
 {
@@ -107,7 +113,7 @@ class Trie
             }
         }
 
-        Console.WriteLine($"Hitting return > {words.Count}");
+        //Console.WriteLine($"Hitting return > {words.Count}");
         return words;
     }
 
@@ -141,5 +147,62 @@ class Trie
             }
         }
     }
+
+    public string AutoCorrect(string word)
+    {
+        var correctedWord = string.Empty;
+        var node = Search(word);
+    
+        if (node != null)
+        {
+            if (node.Children.ContainsKey('*'))
+            {
+                correctedWord = word;
+            }
+            else
+            {
+                correctedWord = CollectAllWords(node).FirstOrDefault() ?? "";
+    
+            }
+        }
+    
+        return correctedWord;
+    }
+    
+    public string AutoCorrectS(string word)
+    {
+        var node = Search(word);
+
+        if (node == null)
+            return string.Empty;
+
+        return node.Children.ContainsKey('*')
+            ? word
+            : CollectAllWords(node).FirstOrDefault() ?? "";
+    }
+    
+    public string AutoCorrectUpdated(string word)
+    {
+        var currentNode = Root;
+        var wordFoundSoFar = string.Empty;
+
+        foreach (var c in word)
+        {
+            if (currentNode.Children.TryGetValue(c, out var next))
+            {
+                wordFoundSoFar += c;
+                currentNode = next;
+            }
+            else
+            {
+                var suffix = CollectAllWords(currentNode).FirstOrDefault() ?? "";
+                return wordFoundSoFar + suffix;
+            }
+        }
+
+        return word;
+    }
+
+
 }
 
