@@ -9,8 +9,9 @@ alice.AddAdjacentVertex(synthia);
 bob.AddAdjacentVertex(synthia);
 synthia.AddAdjacentVertex(bob);
 
+DFStraverse(alice);
 
-void DFStraverse(Vertex vertex, Dictionary<string> visitedVertices = null) {
+void DFStraverse(Vertex vertex, Dictionary<string, bool> visitedVertices = null) {
 	visitedVertices ??= new();
 
 	visitedVertices.Add(vertex.Value, true);
@@ -18,7 +19,7 @@ void DFStraverse(Vertex vertex, Dictionary<string> visitedVertices = null) {
 	Console.WriteLine(vertex.Value);
 
 	foreach(var v in vertex.AdjacentVertices) {
-		if (visitedVertices.HasKey(v.Value))
+		if (visitedVertices.ContainsKey(v.Value))
 			continue;
 		DFStraverse(v, visitedVertices);
 	}
