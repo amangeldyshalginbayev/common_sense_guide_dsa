@@ -25,6 +25,26 @@ void DFStraverse(Vertex vertex, Dictionary<string, bool> visitedVertices = null)
 	}
 }
 
+Vertex DFS(Vertex vertex, string searchValue, Dictionary<string, bool> visitedVertices) {
+	visitedVertices ??= new();
+
+	if (vertex.Value == searchValue) {
+		return vertex;
+	}
+
+	visitedVertices.Add(vertex.Value, true);
+
+	foreach (var v in vertex.AdjacentVertices) {
+		if (visitedVertices.ContainsKey(v.Value))
+			continue;
+
+		var vertexSearched = DFS(v, searchValue, visitedVertices);
+		return vertexSearched;
+	}
+
+	return null;
+}
+
 class Vertex {
 	public string Value { get; set; }
 	public List<Vertex> AdjacentVertices { get; set; }
