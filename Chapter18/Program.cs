@@ -3,13 +3,27 @@
 var alice = new Vertex("alice");
 var bob = new Vertex("bob");
 var synthia = new Vertex("synthia");
+var tanya = new Vertex("tanya");
 
 alice.AddAdjacentVertex(bob);
 alice.AddAdjacentVertex(synthia);
+bob.AddAdjacentVertex(tanya);
 bob.AddAdjacentVertex(synthia);
-synthia.AddAdjacentVertex(bob);
+//synthia.AddAdjacentVertex(bob);
+
 
 DFStraverse(alice);
+var foundVertex = DFS(alice, "tanyak");
+Console.WriteLine($"Found vertex => {foundVertex?.Value ?? string.Empty}");
+
+
+var a = new Vertex("a");
+var b = new Vertex("b");
+var c = new Vertex("c");
+a.AddAdjacentVertex(b);
+a.AddAdjacentVertex(c);
+foundVertex = DFS(a, "c");
+Console.WriteLine($"Found vertex => {foundVertex?.Value ?? string.Empty}");
 
 void DFStraverse(Vertex vertex, Dictionary<string, bool> visitedVertices = null) {
 	visitedVertices ??= new();
@@ -25,7 +39,7 @@ void DFStraverse(Vertex vertex, Dictionary<string, bool> visitedVertices = null)
 	}
 }
 
-Vertex DFS(Vertex vertex, string searchValue, Dictionary<string, bool> visitedVertices) {
+Vertex DFS(Vertex vertex, string searchValue, Dictionary<string, bool> visitedVertices = null) {
 	visitedVertices ??= new();
 
 	if (vertex.Value == searchValue) {
@@ -39,7 +53,9 @@ Vertex DFS(Vertex vertex, string searchValue, Dictionary<string, bool> visitedVe
 			continue;
 
 		var vertexSearched = DFS(v, searchValue, visitedVertices);
-		return vertexSearched;
+		
+		if (vertexSearched != null) 
+			return vertexSearched;
 	}
 
 	return null;
