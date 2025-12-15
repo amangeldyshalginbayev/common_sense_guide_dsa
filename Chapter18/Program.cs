@@ -33,6 +33,7 @@ Console.WriteLine("DFS experiments");
 DFStraverse(a);
 Console.WriteLine("BFS");
 BFStraverse(a);
+// Complexity of DFS/DFS O(V+2E) = O(V+E)
 
 
 void DFStraverse(Vertex vertex, Dictionary<string, bool> visitedVertices = null) {
