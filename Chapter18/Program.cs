@@ -17,13 +17,23 @@ var foundVertex = DFS(alice, "tanyak");
 Console.WriteLine($"Found vertex => {foundVertex?.Value ?? string.Empty}");
 
 
+
 var a = new Vertex("a");
 var b = new Vertex("b");
 var c = new Vertex("c");
+var d = new Vertex("d");
 a.AddAdjacentVertex(b);
 a.AddAdjacentVertex(c);
+c.AddAdjacentVertex(d);
+b.AddAdjacentVertex(d);
 foundVertex = DFS(a, "c");
 Console.WriteLine($"Found vertex => {foundVertex?.Value ?? string.Empty}");
+
+Console.WriteLine("DFS experiments");
+DFStraverse(a);
+Console.WriteLine("BFS");
+BFStraverse(a);
+
 
 void DFStraverse(Vertex vertex, Dictionary<string, bool> visitedVertices = null) {
 	visitedVertices ??= new();
@@ -59,6 +69,29 @@ Vertex DFS(Vertex vertex, string searchValue, Dictionary<string, bool> visitedVe
 	}
 
 	return null;
+}
+
+void BFStraverse(Vertex startingVertex) {
+	var queue = new Queue<Vertex>();
+	var visitedVertices = new Dictionary<string, bool>();
+	visitedVertices.Add(startingVertex.Value, true);
+	queue.Enqueue(startingVertex);
+	var visitCount = 0;
+
+	while (queue.Count != 0) {
+		var currentVertex = queue.Dequeue();
+		Console.WriteLine($"Visiting => {currentVertex.Value}");
+
+		foreach (var v in currentVertex.AdjacentVertices) {
+			visitCount++;
+			if (!visitedVertices.ContainsKey(v.Value)) {
+				visitedVertices.Add(v.Value, true);
+				queue.Enqueue(v);
+			}
+		}
+	}
+
+	Console.WriteLine($"Visit count => {visitCount}");
 }
 
 class Vertex {
