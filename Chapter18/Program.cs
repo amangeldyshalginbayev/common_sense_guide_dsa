@@ -72,11 +72,11 @@ Vertex DFS(Vertex vertex, string searchValue, Dictionary<string, bool> visitedVe
 	return null;
 }
 
-void BFStraverse(Vertex startingVertex) {
+void BFStraverse(Vertex startVertex) {
 	var queue = new Queue<Vertex>();
 	var visitedVertices = new Dictionary<string, bool>();
-	visitedVertices.Add(startingVertex.Value, true);
-	queue.Enqueue(startingVertex);
+	visitedVertices.Add(startVertex.Value, true);
+	queue.Enqueue(startVertex);
 	var visitCount = 0;
 
 	while (queue.Count != 0) {
