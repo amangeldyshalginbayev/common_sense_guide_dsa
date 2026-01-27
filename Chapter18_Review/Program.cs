@@ -14,11 +14,15 @@ var b = new Vertex("b");
 var c = new Vertex("c");
 var d = new Vertex("d");
 var e = new Vertex("e");
+var f =  new Vertex("f");
+var g =  new Vertex("g");
 
 a.AddAdjacentVertex(b);
 b.AddAdjacentVertex(c);
+b.AddAdjacentVertex(f);
 a.AddAdjacentVertex(d);
 a.AddAdjacentVertex(e);
+d.AddAdjacentVertex(g);
 
 DFStraverse(a);
 
